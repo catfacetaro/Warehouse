@@ -1,0 +1,172 @@
+/**
+ * Copyright 2019, Cat Face Taro
+ * 
+ * This file is part of Warehouse.
+ *
+ * Warehouse is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License only.
+ *
+ * Warehouse is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Warehouse.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #758C8E;
+}
+
+#topLevelTable {
+    display: table;
+    margin: auto;
+    padding: 0px;
+    width: 1600px;
+}
+
+.topLevelRow {
+    display: table-row;
+    margin: 0px;
+    padding: 0px;
+}
+
+.topLevelCell1 {
+    display: table-cell;
+    margin: 0px;
+    padding: 0px;
+    width: 1000px;
+    vertical-align: top;
+}
+
+.topLevelCell2 {
+    display: table-cell;
+    margin: 0px;
+    padding: 0px;
+    width: 600px;
+    vertical-align: top;
+}
+
+#mainDisplay {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    width: 1000px;
+    height: 1000px;
+}
+
+#mainPanel {
+    display: table;
+    margin: 0px;
+    padding: 0px;
+    width: 600px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 28pt;
+}
+
+.mainPanelRow {
+    display: table-row;
+    margin: 0px;
+    padding: 0px;
+}
+
+.mainPanelCell1 {
+    display: block;
+    margin: 0px;
+    padding: 20px 0px 0px 20px;
+    text-align: left;
+    color: rgb(191, 249, 255);
+}
+
+.mainPanelCell2 {
+    display: block;
+    margin: 0px;
+    padding: 0px 20px 0px 0px;
+    text-align: right;
+    color: rgb(177, 206, 209);
+}
+
+@media ( max-width: 1600px) {
+    #topLevelTable {
+        width: 1000px;
+    }
+    .topLevelCell1 {
+        display: block;
+        width: 1000px;
+    }
+    .topLevelCell2 {
+        display: block;
+        width: 1000px;
+    }
+    #mainPanel {
+        width: 1000px;
+    }
+    .mainPanelCell1 {
+        padding: 20px 0px 0px 0px;
+    }
+    .mainPanelCell2 {
+        padding: 0px 0px 0px 0px;
+    }
+}
+
+@media ( max-width: 1000px) {
+    #topLevelTable {
+        width: 600px;
+    }
+    .topLevelCell1 {
+        display: block;
+        width: 600px;
+    }
+    .topLevelCell2 {
+        display: block;
+        width: 600px;
+    }
+    #mainDisplay {
+        width: 600px;
+        height: 600px;
+    }
+    #mainPanel {
+        width: 600px;
+        font-size: 18pt;
+    }
+    .mainPanelCell1 {
+        padding: 10px 0px 0px 0px;
+    }
+    .mainPanelCell2 {
+        padding: 0px 0px 0px 0px;
+    }
+}
+
+@media ( max-width: 600px) {
+    #topLevelTable {
+        width: 300px;
+    }
+    .topLevelCell1 {
+        display: block;
+        width: 300px;
+    }
+    .topLevelCell2 {
+        display: block;
+        width: 300px;
+    }
+    #mainDisplay {
+        width: 300px;
+        height: 300px;
+    }
+    #mainPanel {
+        width: 300px;
+        font-weight: normal;
+        font-size: 12pt;
+    }
+    .mainPanelCell1 {
+        padding: 0px;
+    }
+    .mainPanelCell2 {
+        padding: 0px;
+    }
+}

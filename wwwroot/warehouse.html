@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+
+<!--
+/**
+ * Copyright 2019, Cat Face Taro
+ * 
+ * This file is part of Warehouse.
+ *
+ * Warehouse is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License only.
+ *
+ * Warehouse is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Warehouse.  If not, see <https://www.gnu.org/licenses/>.
+ */
+-->
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <title>Warehouse</title>
+
+    <link rel="icon" href="icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css"
+        integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css"
+        integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
+    <link rel="stylesheet" href="warehouse.css">
+
+    <script src="base.js"></script>
+    <script src="levels.js"></script>
+    <script src="WarehouseModel.js"></script>
+    <script src="WarehouseDisplay.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div id="topLevelTable">
+        <div class="topLevelRow">
+            <div class="topLevelCell1">
+                <canvas id="mainDisplay"></canvas>
+            </div>
+            <div class="topLevelCell2">
+                <div id="mainPanel">
+                    <div class="mainPanelRow">
+                        <div class="mainPanelCell1">Moves</div>
+                        <div class="mainPanelCell2" id="movesDisplay"></div>
+                    </div>
+                    <div class="mainPanelRow">
+                        <div class="mainPanelCell1">Level Set</div>
+                        <div class="mainPanelCell2" id="levelSetDisplay"></div>
+                    </div>
+                    <div class="mainPanelRow">
+                        <div class="mainPanelCell1">Level</div>
+                        <div class="mainPanelCell2" id="levelDisplay"></div>
+                    </div>
+                    <div class="mainPanelRow">
+                        <div class="mainPanelCell1">Change Level Set</div>
+                        <div class="mainPanelCell2">Ctrl <i class="fas fa-long-arrow-alt-up"></i>, Ctrl <i
+                                class="fas fa-long-arrow-alt-down"></i></div>
+                    </div>
+                    <div class="mainPanelRow">
+                        <div class="mainPanelCell1">Change Level</div>
+                        <div class="mainPanelCell2">Ctrl <i class="fas fa-long-arrow-alt-left"></i>, Ctrl <i
+                                class="fas fa-long-arrow-alt-right"></i></div>
+                    </div>
+                    <div class="mainPanelRow">
+                        <div class="mainPanelCell1">Reset Level</div>
+                        <div class="mainPanelCell2">Ctrl Space</div>
+                    </div>
+                    <div class="mainPanelRow">
+                        <div class="mainPanelCell1">Move</div>
+                        <div class="mainPanelCell2"><i class="fas fa-long-arrow-alt-up"></i>, <i
+                                class="fas fa-long-arrow-alt-down"></i>, <i class="fas fa-long-arrow-alt-left"></i>, <i
+                                class="fas fa-long-arrow-alt-right"></i></div>
+                    </div>
+                    <div class="mainPanelRow">
+                        <div class="mainPanelCell1">Undo Move</div>
+                        <div class="mainPanelCell2">Backspace</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
