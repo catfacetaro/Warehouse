@@ -12,10 +12,8 @@ Sokoban clone in HTML / CSS / Javascript
 .slc files contains Sokoban Levels, and can be downloaded from [https://www.sourcecode.se/sokoban/levels](https://www.sourcecode.se/sokoban/levels).
 
 To include new levels:
-- Put the slc files in the slc folder.
-- Run `generate_level.js` using nodejs to generate the `levels.js` file in `wwwroot` directory.
-
-To run `generate_level.js` :
+- Put the .slc files in the `slc` folder.
 - Go to `generate_levels` directory.
 - `npm install`
 - `node generate_level.js`
+- `levels.js` will be generated in the `wwwroot` directory.
