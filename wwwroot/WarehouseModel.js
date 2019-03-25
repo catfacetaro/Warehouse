@@ -1,49 +1,207 @@
-/**
+/*
  * Copyright 2019, Cat Face Taro
  * 
  * This file is part of Warehouse.
- *
+ *  
  * Warehouse is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, version 3 of the License only.
- *
+ * 
  * Warehouse is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with Warehouse.  If not, see <https://www.gnu.org/licenses/>.
  */
 
- var WarehouseModel = function () {
-    var _size = { rows: 0, cols: 0 };
-    var _history = [ { state: null, player: { x: -1, y: -1 } } ];
+var WarehouseModel = function () {
+    const STATE_CHANGED_EVENT_TYPE = "stateChanged";
+    const STATE_CHANGED_EVENT = { source: this };
+
+    var _eventListenerMap = new Map();
+
+    var _size = null;
+    var _history = [ { move: null, state: null, pos: null, solved: null } ];
+
+    /**
+     * Dispatches event.
+     */
+    var _dispatchEvent = function ( eventType, event ) {
+        if ( !_eventListenerMap.has( eventType ) ) {
+            return;
+        }
+        var eventTypeListeners = _eventListenerMap.get( eventType );
+        eventTypeListeners.forEach( eventListener => eventListener( event ) );
+    }.bind( this );
+
+    /**
+     * Returns the value at position of state.
+     */
+    var _getValueAtPosition = function ( state, pos ) {
+        return state[ pos.y ][ pos.x ];
+    }.bind( this );
+
+    /**
+     * Sets the value at position of state.
+     */
+    var _setValueAtPosition = function ( state, pos, value ) {
+        state[ pos.y ] = state[ pos.y ].slice( 0, pos.x ) + value + state[ pos.y ].slice( pos.x + 1 );
+    }.bind( this );
+
+
+    /**
+     * Returns whether position is within size.
+     */
+    var _isPositionWithinBounds = function ( pos, size ) {
+        return ( pos.x >= 0 ) && ( pos.y >= 0 ) && ( pos.x < size.cols ) && ( pos.y < size.rows );
+    }.bind( this );
+
+    /**
+     * Computes whether the game is solved.
+     */
+    var _computeIsSolved = function ( state ) {
+        var goalCount = 0;
+        var boxCount = 0;
+
+        for ( var i = 0; i < state.length; i++ ) {
+            for ( var j = 0; j < state[ i ].length; j++ ) {
+                if ( state[ i ][ j ] === GOAL ) {
+                    goalCount++;
+                }
+                else if ( state[ i ][ j ] === PLAYER_ON_GOAL ) {
+                    goalCount++;
+                }
+                else if ( state[ i ][ j ] === BOX ) {
+                    boxCount++;
+                }
+            }
+        }
+
+        return ( goalCount === 0 ) || ( boxCount === 0 );
+    }.bind( this );
+
+    /**
+     * Implementation of player movement.
+     */
+    var _move = function ( posDelta, move, push ) {
+        if ( _size === null ) {
+            return;
+        }
+
+        var state = _history[ _history.length - 1 ].state;
+        if ( state === null ) {
+            return;
+        }
+
+        var solved = _history[ _history.length - 1 ].solved;
+        if ( solved === null ) {
+            return;
+        }
+
+        if ( solved ) {
+            return;
+        }
+
+        var pos0 = _history[ _history.length - 1 ].pos;
+        if ( pos0 === null ) {
+            return;
+        }
+
+        var pos1 = { x: pos0.x + posDelta.x, y: pos0.y + posDelta.y };
+        if ( !_isPositionWithinBounds( pos1, _size ) ) {
+            return;
+        }
+
+        var val0 = _getValueAtPosition( state, pos0 );
+        var val1 = _getValueAtPosition( state, pos1 );
+        if ( ( val1 === EMPTY ) || ( val1 === GOAL ) ) {
+            var newState = state.slice( 0 );
+            _setValueAtPosition( newState, pos0, ( val0 == PLAYER ) ? EMPTY : GOAL );
+            _setValueAtPosition( newState, pos1, ( val1 === EMPTY ) ? PLAYER : PLAYER_ON_GOAL );
+            var newSolved = _computeIsSolved( newState );
+            _history.push( { move: move, state: newState, pos: pos1, solved: newSolved } );
+            setTimeout( _dispatchEvent, 0, STATE_CHANGED_EVENT_TYPE, STATE_CHANGED_EVENT );
+        }
+
+        var pos2 = { x: pos1.x + posDelta.x, y: pos1.y + posDelta.y };
+        if ( !_isPositionWithinBounds( pos2, _size ) ) {
+            return;
+        }
+
+        var val2 = _getValueAtPosition( state, pos2 );
+        if ( ( val1 === BOX ) || ( val1 === BOX_ON_GOAL ) ) {
+            if ( ( val2 === EMPTY ) || ( val2 === GOAL ) ) {
+                var newState = state.slice( 0 );
+                _setValueAtPosition( newState, pos0, ( val0 == PLAYER ) ? EMPTY : GOAL );
+                _setValueAtPosition( newState, pos1, ( val1 === BOX ) ? PLAYER : PLAYER_ON_GOAL );
+                _setValueAtPosition( newState, pos2, ( val2 === EMPTY ) ? BOX : BOX_ON_GOAL );
+                var newSolved = _computeIsSolved( newState );
+                _history.push( { move: push, state: newState, pos: pos1, solved: newSolved } );
+                setTimeout( _dispatchEvent, 0, STATE_CHANGED_EVENT_TYPE, STATE_CHANGED_EVENT );
+            }
+        }
+    }.bind( this );
+
+    /**
+     * Adds event listener, if it was not already added.
+     */
+    this.addEventListener = function ( eventType, eventListener ) {
+        var eventTypeListeners;
+        if ( _eventListenerMap.has( eventType ) ) {
+            eventTypeListeners = _eventListenerMap.get( eventType );
+        }
+        else {
+            eventTypeListeners = [];
+            _eventListenerMap.set( eventType, eventTypeListeners );
+        }
+
+        // allow event listener to be only added once
+        if ( eventTypeListeners.indexOf( eventListener ) < 0 ) {
+            eventTypeListeners.push( eventListener );
+        }
+    }.bind( this );
+
+    /**
+     * Removes event listener, if it was already added.
+     */
+    this.removeEventListener = function ( eventType, eventListener ) {
+        var eventTypeListeners;
+        if ( _eventListenerMap.has( eventType ) ) {
+            eventTypeListeners = _eventListenerMap.get( eventType );
+        }
+        else {
+            eventTypeListeners = [];
+            _eventListenerMap.set( eventType, eventTypeListeners );
+        }
+
+        var index = eventTypeListeners.indexOf( eventListener );
+        if ( index >= 0 ) {
+            eventTypeListeners.splice( index, 1 );
+        }
+    }.bind( this );
 
     /**
      * Returns the number of rows and columns.
      */
     this.getSize = function () {
-        return Object.assign( {}, _size );
+        return ( _size === null ) ? null : Object.assign( {}, _size );
     }.bind( this );
 
     /**
      * Returns the number of moves made.
      */
     this.getNumberOfMoves = function () {
+        // less index 0
         return _history.length - 1;
     }.bind( this );
-
 
     /**
      * Returns the last move, or move at the specified number.
      */
     this.getMove = function ( moveNum ) {
         if ( moveNum === undefined ) {
-            moveNum = _history.length - 1;
-        }
-
-        if ( moveNum === null ) {
             moveNum = _history.length - 1;
         }
 
@@ -58,11 +216,8 @@
             moveNum = _history.length - 1;
         }
 
-        if ( moveNum === null ) {
-            moveNum = _history.length - 1;
-        }
-
-        return _array2d_copyOf( _history[ moveNum ].state );
+        var state = _history[ moveNum ].state;
+        return ( state === null ) ? null : state.slice( 0 );
     }.bind( this );
 
     /**
@@ -73,179 +228,78 @@
             moveNum = _history.length - 1;
         }
 
-        if ( moveNum === null ) {
+        var pos = _history[ moveNum ].pos;
+        return ( pos === null ) ? null : Object.assign( {}, pos );
+    }.bind( this );
+
+    /**
+     * Returns whether the game is solved at the end of current or specified move.
+     */
+    this.getIsSolved = function ( moveNum ) {
+        if ( moveNum === undefined ) {
             moveNum = _history.length - 1;
         }
-
-        return Object.assign( {}, _history[ moveNum ].player );
+        return _history[ moveNum ].solved;
     }.bind( this );
 
-    /**
-     * Reverts the game to the state at the end of the specified move.
-     */
-    this.revert = function ( moveNum ) {
-        if ( moveNum === undefined ) {
-            // no change
-            return;
-        }
-
-        if ( moveNum === null ) {
-            // no change
-            return;
-        }
-
-        _history = _history.slice( 0, moveNum + 1 );
-    }.bind( this );
 
     /**
-     * Resets the game to its initial state, or the new specified initial state.
+     * Sets the game initial state.
      */
-    this.reset = function ( state ) {
-        if ( state === undefined ) {
-            this.revert( 0 );
-            return;
+    this.setInitialState = function ( state ) {
+        var newState = new Array( state.length );
+
+        // find size
+        var newSize = { rows: state.length, cols: 0 };
+        for ( var i = 0; i < state.length; i++ ) {
+            if ( state[ i ].length > newSize.cols ) {
+                newSize.cols = state[ i ].length;
+            }
         }
 
-        if ( state === null ) {
-            this.revert( 0 );
-            return;
+        // copies state, ensuring all rows are of length newSize.cols.
+        for ( var i = 0; i < newSize.rows; i++ ) {
+            newState[ i ] = state[ i ].padEnd( newSize.cols, EMPTY ).slice( 0, newSize.cols );
         }
-
-        var newSize = _array2d_getSizeOf( state );
-        var newState = _array2d_copyOf( state );
 
         // find player
-        var newPlayer = { x: -1, y: -1 };
+        var newPos = null;
         for ( var i = 0; i < newSize.rows; i++ ) {
             for ( var j = 0; j < newSize.cols; j++ ) {
-                if ( ( newState[ i ][ j ] & 0x0f ) === PLAYER ) {
-                    newPlayer.y = i;
-                    newPlayer.x = j;
+                if ( ( newState[ i ][ j ] === PLAYER ) || ( newState[ i ][ j ] == PLAYER_ON_GOAL ) ) {
+                    newPos = { x: j, y: i };
                     j = newSize.cols;
                     i = newSize.rows;
                 }
             }
         }
 
+        var newSolved = _computeIsSolved( newState );
+
         _size = newSize;
-        _history = [ { state: newState, player: newPlayer } ];
+        _history = [ { move: null, state: newState, pos: newPos, solved: newSolved } ];
+        setTimeout( _dispatchEvent, 0, STATE_CHANGED_EVENT_TYPE, STATE_CHANGED_EVENT );
     }.bind( this );
 
     /**
      * Moves player up.
      */
     this.moveUp = function () {
-        var state = _history[ _history.length - 1 ].state;
-        var player = _history[ _history.length - 1 ].player;
-
-        if ( player.y <= 0 ) {
-            return false;
-        }
-
-        if ( ( state[ player.y - 1 ][ player.x ] & 0x0f ) === EMPTY ) {
-            var newState = _array2d_copyOf( state );
-            newState[ player.y ][ player.x ] = ( newState[ player.y ][ player.x ] & 0xf0 ) | EMPTY;
-            newState[ player.y - 1 ][ player.x ] = ( newState[ player.y - 1 ][ player.x ] & 0xf0 ) | PLAYER;
-            var newPlayer = { x: player.x, y: player.y - 1 };
-            _history.push( { move: UP, state: newState, player: newPlayer } );
-            return true;
-        }
-
-        if ( player.y <= 1 ) {
-            return false;
-        }
-
-        if ( ( state[ player.y - 1 ][ player.x ] & 0x0f ) === BOX ) {
-            if ( ( state[ player.y - 2 ][ player.x ] & 0x0f ) === EMPTY ) {
-                var newState = _array2d_copyOf( state );
-                newState[ player.y ][ player.x ] = ( newState[ player.y ][ player.x ] & 0xf0 ) | EMPTY;
-                newState[ player.y - 1 ][ player.x ] = ( newState[ player.y - 1 ][ player.x ] & 0xf0 ) | PLAYER;
-                newState[ player.y - 2 ][ player.x ] = ( newState[ player.y - 2 ][ player.x ] & 0xf0 ) | BOX;
-                var newPlayer = { x: player.x, y: player.y - 1 };
-                _history.push( { move: UP, state: newState, player: newPlayer } );
-            }
-            return true;
-        }
-
-        return false;
+        _move( { x: 0, y: -1 }, MOVE_UP, PUSH_UP );
     }.bind( this );
 
     /**
      * Moves player down.
      */
     this.moveDown = function () {
-        var state = _history[ _history.length - 1 ].state;
-        var player = _history[ _history.length - 1 ].player;
-
-        if ( player.y >= _size.rows - 1 ) {
-            return false;
-        }
-
-        if ( ( state[ player.y + 1 ][ player.x ] & 0x0f ) === EMPTY ) {
-            var newState = _array2d_copyOf( state );
-            newState[ player.y ][ player.x ] = ( newState[ player.y ][ player.x ] & 0xf0 ) | EMPTY;
-            newState[ player.y + 1 ][ player.x ] = ( newState[ player.y + 1 ][ player.x ] & 0xf0 ) | PLAYER;
-            var newPlayer = { x: player.x, y: player.y + 1 };
-            _history.push( { move: DOWN, state: newState, player: newPlayer } );
-            return true;
-        }
-
-        if ( player.y >= _size.rows - 2 ) {
-            return false;
-        }
-
-        if ( ( state[ player.y + 1 ][ player.x ] & 0x0f ) === BOX ) {
-            if ( ( state[ player.y + 2 ][ player.x ] & 0x0f ) === EMPTY ) {
-                var newState = _array2d_copyOf( state );
-                newState[ player.y ][ player.x ] = ( newState[ player.y ][ player.x ] & 0xf0 ) | EMPTY;
-                newState[ player.y + 1 ][ player.x ] = ( newState[ player.y + 1 ][ player.x ] & 0xf0 ) | PLAYER;
-                newState[ player.y + 2 ][ player.x ] = ( newState[ player.y + 2 ][ player.x ] & 0xf0 ) | BOX;
-                var newPlayer = { x: player.x, y: player.y + 1 };
-                _history.push( { move: DOWN, state: newState, player: newPlayer } );
-            }
-            return true;
-        }
-
-        return false;
+        _move( { x: 0, y: 1 }, MOVE_DOWN, PUSH_DOWN );
     }.bind( this );
 
     /**
      * Moves player left.
      */
     this.moveLeft = function () {
-        var state = _history[ _history.length - 1 ].state;
-        var player = _history[ _history.length - 1 ].player;
-
-        if ( player.x <= 0 ) {
-            return false;
-        }
-
-        if ( ( state[ player.y ][ player.x - 1 ] & 0x0f ) === EMPTY ) {
-            var newState = _array2d_copyOf( state );
-            newState[ player.y ][ player.x ] = ( newState[ player.y ][ player.x ] & 0xf0 ) | EMPTY;
-            newState[ player.y ][ player.x - 1 ] = ( newState[ player.y ][ player.x - 1 ] & 0xf0 ) | PLAYER;
-            var newPlayer = { x: player.x - 1, y: player.y };
-            _history.push( { move: LEFT, state: newState, player: newPlayer } );
-            return true;
-        }
-
-        if ( player.x <= 1 ) {
-            return false;
-        }
-
-        if ( ( state[ player.y ][ player.x - 1 ] & 0x0f ) === BOX ) {
-            if ( ( state[ player.y ][ player.x - 2 ] & 0x0f ) === EMPTY ) {
-                var newState = _array2d_copyOf( state );
-                newState[ player.y ][ player.x ] = ( newState[ player.y ][ player.x ] & 0xf0 ) | EMPTY;
-                newState[ player.y ][ player.x - 1 ] = ( newState[ player.y ][ player.x - 1 ] & 0xf0 ) | PLAYER;
-                newState[ player.y ][ player.x - 2 ] = ( newState[ player.y ][ player.x - 2 ] & 0xf0 ) | BOX;
-                var newPlayer = { x: player.x - 1, y: player.y };
-                _history.push( { move: LEFT, state: newState, player: newPlayer } );
-            }
-            return true;
-        }
-
-        return false;
+        _move( { x: -1, y: 0 }, MOVE_LEFT, PUSH_LEFT );
     }.bind( this );
 
 
@@ -253,75 +307,28 @@
      * Moves player right.
      */
     this.moveRight = function () {
-        var state = _history[ _history.length - 1 ].state;
-        var player = _history[ _history.length - 1 ].player;
-
-        if ( player.x >= _size.cols - 1 ) {
-            return false;
-        }
-
-        if ( ( state[ player.y ][ player.x + 1 ] & 0x0f ) === EMPTY ) {
-            var newState = _array2d_copyOf( state );
-            newState[ player.y ][ player.x ] = ( newState[ player.y ][ player.x ] & 0xf0 ) | EMPTY;
-            newState[ player.y ][ player.x + 1 ] = ( newState[ player.y ][ player.x + 1 ] & 0xf0 ) | PLAYER;
-            var newPlayer = { x: player.x + 1, y: player.y };
-            _history.push( { move: RIGHT, state: newState, player: newPlayer } );
-            return true;
-        }
-
-        if ( player.x >= _size.cols - 2 ) {
-            return false;
-        }
-
-        if ( ( state[ player.y ][ player.x + 1 ] & 0x0f ) === BOX ) {
-            if ( ( state[ player.y ][ player.x + 2 ] & 0x0f ) === EMPTY ) {
-                var newState = _array2d_copyOf( state );
-                newState[ player.y ][ player.x ] = ( newState[ player.y ][ player.x ] & 0xf0 ) | EMPTY;
-                newState[ player.y ][ player.x + 1 ] = ( newState[ player.y ][ player.x + 1 ] & 0xf0 ) | PLAYER;
-                newState[ player.y ][ player.x + 2 ] = ( newState[ player.y ][ player.x + 2 ] & 0xf0 ) | BOX;
-                var newPlayer = { x: player.x + 1, y: player.y };
-                _history.push( { move: RIGHT, state: newState, player: newPlayer } );
-            }
-            return true;
-        }
-
-        return false;
+        _move( { x: 1, y: 0 }, MOVE_RIGHT, PUSH_RIGHT );
     }.bind( this );
 
     /**
-     * Returns whether the game is solved at the end of current or specified move.
+     * Undoes move.
      */
-    this.isSolved = function ( moveNum ) {
-        var goalEmptyCount = 0;
-        var normalBoxCount = 0;
+    this.undoMove = function () {
+        if ( _history.length > 1 ) {
+            _history = _history.slice( 0, _history.length - 1 );
+            setTimeout( _dispatchEvent, 0, STATE_CHANGED_EVENT_TYPE, STATE_CHANGED_EVENT );
+        }
+    }.bind( this );
 
-        const GOAL_EMPTY = GOAL | EMPTY;
-        const NORMAL_BOX = NORMAL | BOX;
-
+    /**
+     * Reverts the game to the state at the end of the specified move.
+     */
+    this.revert = function ( moveNum ) {
         if ( moveNum === undefined ) {
-            moveNum = _history.length - 1;
+            moveNum = 0;
         }
 
-        if ( moveNum === null ) {
-            moveNum = _history.length - 1;
-        }
-
-        var state = _history[ moveNum ].state;
-        var player = _history[ moveNum ].player;
-        for ( var i = 0; i < _size.rows; i++ ) {
-            for ( var j = 0; j < _size.cols; j++ ) {
-                if ( state[ i ][ j ] === GOAL_EMPTY ) {
-                    goalEmptyCount++;
-                }
-                else if ( state[ i ][ j ] === NORMAL_BOX ) {
-                    normalBoxCount++;
-                }
-                else if ( ( i === player.y ) && ( j === player.x ) && ( ( state[ i ][ j ] & 0xf0 ) === GOAL ) ) {
-                    goalEmptyCount++;
-                }
-            }
-        }
-
-        return ( goalEmptyCount === 0 ) || ( normalBoxCount === 0 );
+        _history = _history.slice( 0, moveNum + 1 );
+        setTimeout( _dispatchEvent, 0, STATE_CHANGED_EVENT_TYPE, STATE_CHANGED_EVENT );
     }.bind( this );
 }

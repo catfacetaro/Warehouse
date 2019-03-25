@@ -22,6 +22,14 @@ body {
     background-color: #758C8E;
 }
 
+.normalTextColor {
+    color: rgb(177, 206, 209);
+}
+
+.highlightTextColor {
+    color: rgb(191, 249, 255);
+}
+
 #topLevelTable {
     display: table;
     margin: auto;
@@ -64,8 +72,7 @@ body {
     margin: 0px;
     padding: 0px;
     width: 600px;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-weight: bold;
+    font-family: 'Luckiest Guy', cursive;
     font-size: 28pt;
 }
 
@@ -80,7 +87,6 @@ body {
     margin: 0px;
     padding: 20px 0px 0px 20px;
     text-align: left;
-    color: rgb(191, 249, 255);
 }
 
 .mainPanelCell2 {
@@ -88,7 +94,6 @@ body {
     margin: 0px;
     padding: 0px 20px 0px 0px;
     text-align: right;
-    color: rgb(177, 206, 209);
 }
 
 @media ( max-width: 1600px) {
