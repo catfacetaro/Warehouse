@@ -19,6 +19,10 @@
 var WarehouseModel = function () {
     const STATE_CHANGED_EVENT_TYPE = "stateChanged";
     const STATE_CHANGED_EVENT = { source: this };
+    const MOVEMENT_DELTA_UP = { x: 0, y: -1 };
+    const MOVEMENT_DELTA_DOWN = { x: 0, y: 1 };
+    const MOVEMENT_DELTA_LEFT = { x: -1, y: 0 };
+    const MOVEMENT_DELTA_RIGHT = { x: 1, y: 0 };
 
     var _eventListenerMap = new Map();
 
@@ -85,7 +89,7 @@ var WarehouseModel = function () {
     /**
      * Implementation of player movement.
      */
-    var _move = function ( posDelta, move, push ) {
+    var _moveImpl = function ( posDelta, move, push ) {
         if ( _size === null ) {
             return;
         }
@@ -285,21 +289,21 @@ var WarehouseModel = function () {
      * Moves player up.
      */
     this.moveUp = function () {
-        _move( { x: 0, y: -1 }, MOVE_UP, PUSH_UP );
+        _moveImpl( MOVEMENT_DELTA_UP, MOVE_UP, PUSH_UP );
     }.bind( this );
 
     /**
      * Moves player down.
      */
     this.moveDown = function () {
-        _move( { x: 0, y: 1 }, MOVE_DOWN, PUSH_DOWN );
+        _moveImpl( MOVEMENT_DELTA_DOWN, MOVE_DOWN, PUSH_DOWN );
     }.bind( this );
 
     /**
      * Moves player left.
      */
     this.moveLeft = function () {
-        _move( { x: -1, y: 0 }, MOVE_LEFT, PUSH_LEFT );
+        _moveImpl( MOVEMENT_DELTA_LEFT, MOVE_LEFT, PUSH_LEFT );
     }.bind( this );
 
 
@@ -307,7 +311,7 @@ var WarehouseModel = function () {
      * Moves player right.
      */
     this.moveRight = function () {
-        _move( { x: 1, y: 0 }, MOVE_RIGHT, PUSH_RIGHT );
+        _moveImpl( MOVEMENT_DELTA_RIGHT, MOVE_RIGHT, PUSH_RIGHT );
     }.bind( this );
 
     /**

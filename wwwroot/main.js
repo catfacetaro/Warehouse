@@ -16,89 +16,40 @@
  * along with Warehouse.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * Level set and level control functions.
- */
-var curLevelSetIndex = 0;
-var curLevelIndex = 0;
+var mainModel = null;
+var mainDisplay = null;
+var mainLevelController = null;
 
-var setToLevel = function ( levelSetIndex, levelIndex ) {
-    mainModel.setInitialState( levelSets[ levelSetIndex ][ "levels" ][ levelIndex ][ "level" ] );
-    curLevelSetIndex = levelSetIndex;
-    curLevelIndex = levelIndex;
+var main = function () {
+    // initialize mainModel
+    mainModel = new WarehouseModel();
+
+    // initialize mainDisplay
+    mainDisplay = new WarehouseDisplay( "mainDisplay" );
+    mainDisplay.setModel( mainModel );
+
+    // initialize mainLevelController
+    mainLevelController = new LevelController( mainModel );
+    mainLevelController.setToLevel( 0, 0 );
+
+    // listen to events
+    mainModel.addEventListener( "stateChanged", updateMainPanel );
+    window.addEventListener( "keydown", keyDown );
 }
 
-var setToNextLevelSet = function () {
-    var nextLevelSetIndex = curLevelSetIndex + 1;
-    var nextLevelIndex = 0;
-
-    if ( nextLevelSetIndex >= levelSets.length ) {
-        nextLevelSetIndex = 0;
-    }
-
-    setToLevel( nextLevelSetIndex, nextLevelIndex );
+var updateMainPanel = function () {
+    document.getElementById( "movesDisplay" ).textContent = mainModel.getNumberOfMoves();
+    document.getElementById( "levelSetDisplay" ).textContent = mainLevelController.getLevelSetTitle();
+    document.getElementById( "levelDisplay" ).textContent = ( mainLevelController.getCurrentLevelIndex() + 1 ) + " of " + mainLevelController.getNumberOfLevels();
 }
 
-var setToPreviousLevelSet = function () {
-    var prevLevelSetIndex = curLevelSetIndex - 1;
-    var prevLevelIndex = 0;
-    if ( prevLevelSetIndex < 0 ) {
-        prevLevelSetIndex = levelSets.length - 1;
-    }
-
-    setToLevel( prevLevelSetIndex, prevLevelIndex );
-}
-
-var setToNextLevel = function ( enableLevelSetChange ) {
-    var nextLevelSetIndex = curLevelSetIndex;
-    var nextLevelIndex = curLevelIndex + 1;
-    if ( enableLevelSetChange ) {
-        if ( nextLevelIndex >= levelSets[ curLevelSetIndex ][ "levels" ].length ) {
-            nextLevelIndex = 0;
-            nextLevelSetIndex++;
-        }
-        if ( nextLevelSetIndex >= levelSets.length ) {
-            nextLevelSetIndex = 0;
-        }
-    }
-    else {
-        if ( nextLevelIndex >= levelSets[ curLevelSetIndex ][ "levels" ].length ) {
-            nextLevelIndex = 0;
-        }
-    }
-    setToLevel( nextLevelSetIndex, nextLevelIndex );
-}
-
-var setToPreviousLevel = function ( enableLevelSetChange ) {
-    var prevLevelSetIndex = curLevelSetIndex;
-    var prevLevelIndex = curLevelIndex - 1;
-    if ( enableLevelSetChange ) {
-        if ( prevLevelIndex < 0 ) {
-            prevLevelSetIndex--;
-            if ( prevLevelSetIndex < 0 ) {
-                prevLevelSetIndex = levelSets.length - 1;
-            }
-            prevLevelIndex = levelSets[ prevLevelSetIndex ][ "levels" ].length - 1;
-        }
-    }
-    else {
-        if ( prevLevelIndex < 0 ) {
-            prevLevelIndex = levelSets[ curLevelSetIndex ][ "levels" ].length - 1;
-        }
-    }
-    setToLevel( prevLevelSetIndex, prevLevelIndex );
-}
-
-/**
- * Keyboard event handler.
- */
-var keydown = function ( event ) {
+var keyDown = function ( event ) {
     // console.log( event.key );
     switch ( event.key ) {
         case "ArrowUp":
         case "Up":
             if ( event.ctrlKey ) {
-                setToPreviousLevelSet();
+                mainLevelController.setToPreviousLevelSet();
             }
             else if ( !event.altKey && !event.shiftKey ) {
                 mainModel.moveUp();
@@ -107,7 +58,7 @@ var keydown = function ( event ) {
         case "ArrowDown":
         case "Down":
             if ( event.ctrlKey ) {
-                setToNextLevelSet();
+                mainLevelController.setToNextLevelSet();
             }
             else if ( !event.altKey && !event.shiftKey ) {
                 mainModel.moveDown();
@@ -116,7 +67,7 @@ var keydown = function ( event ) {
         case "ArrowLeft":
         case "Left":
             if ( event.ctrlKey ) {
-                setToPreviousLevel( false );
+                mainLevelController.setToPreviousLevel( false );
             }
             else if ( !event.altKey && !event.shiftKey ) {
                 mainModel.moveLeft();
@@ -125,7 +76,7 @@ var keydown = function ( event ) {
         case "ArrowRight":
         case "Right":
             if ( event.ctrlKey ) {
-                setToNextLevel( false );
+                mainLevelController.setToNextLevel( false );
             }
             else if ( !event.altKey && !event.shiftKey ) {
                 mainModel.moveRight();
@@ -142,26 +93,6 @@ var keydown = function ( event ) {
         default:
             break;
     }
-}
-
-var updateMainPanel = function () {
-    document.getElementById( "movesDisplay" ).textContent = mainModel.getNumberOfMoves();
-    document.getElementById( "levelSetDisplay" ).textContent = levelSets[ curLevelSetIndex ][ "title" ];
-    document.getElementById( "levelDisplay" ).textContent = ( curLevelIndex + 1 ) + " of " + levelSets[ curLevelSetIndex ][ "levels" ].length;
-}
-
-var mainDisplay = null;
-var mainModel = null;
-
-var main = function () {
-    mainModel = new WarehouseModel();
-    setToLevel( 0, 0 );
-
-    mainDisplay = new WarehouseDisplay( "mainDisplay" );
-    mainDisplay.setModel( mainModel );
-
-    mainModel.addEventListener( "stateChanged", updateMainPanel );
-    window.addEventListener( "keydown", keydown );
 }
 
 // invoke main() after page has loaded
