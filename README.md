@@ -24,4 +24,3 @@ To include new levels:
 - Ensure `terser` is installed. If not, run `npm install -g terser`.
 - Run `terser *.js -o warehouse.min.js`
 - Modify `warehouse.html` to load `warehouse.min.js` instead of loading all the Javascript individually.
-
