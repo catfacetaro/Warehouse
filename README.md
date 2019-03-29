@@ -1,13 +1,13 @@
 ![](https://catfacetaro.github.io/Warehouse/wwwroot/icon.png)
 
 # Warehouse
-Version 1.1
+### Version 1.1
 Sokoban clone in HTML / CSS / Javascript
 
 ### Play
 - Open `warehouse.html` in `wwwroot` directory with Chrome browser locally.
 - Requires internet connection, because it uses free internet resources like Google Web Font and FontAwesome.
-- Alternatively, visit [warehouse.html](https://catfacetaro.github.io/Warehouse/wwwroot/warehouse.html) directly hosted by GitHub Pages
+- Alternatively, visit [warehouse.html](https://catfacetaro.github.io/Warehouse/wwwroot/warehouse.html) directly @ GitHub Pages
 
 ### Levels
 .slc files contains Sokoban Levels, and can be downloaded from [https://www.sourcecode.se/sokoban/levels](https://www.sourcecode.se/sokoban/levels).
