@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/catfacetaro/Warehouse/master/wwwroot/icon.png)
+![](https://catfacetaro.github.io/Warehouse/wwwroot/icon.png)
 
 # Warehouse
 Version 1.1
