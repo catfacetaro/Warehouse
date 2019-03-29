@@ -16,11 +16,9 @@
  * along with Warehouse.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-var WarehouseDisplay = function ( canvasId ) {
+var WarehouseDisplay = function ( canvasElement ) {
     var _model = null;
-
-    var _canvasId;
-    var _canvasElement;
+    var _canvasElement = canvasElement;
 
     /**
      * Sets the model to display.
@@ -125,7 +123,4 @@ var WarehouseDisplay = function ( canvasId ) {
             }
         }
     }.bind( this );
-
-    _canvasId = canvasId;
-    _canvasElement = document.getElementById( _canvasId );
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2019, Cat Face Taro
  * 
  * This file is part of Warehouse.
@@ -16,151 +16,251 @@
  * along with Warehouse.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+*:focus {
+    outline: none;
+}
+
 body {
     margin: 0px;
     padding: 0px;
-    background-color: #758C8E;
+    background-color: #758c8e;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 28pt;
+    color: #b1ced1;
+    user-select: none;
 }
 
-.normalTextColor {
-    color: rgb(177, 206, 209);
+table, tbody, tr, td {
+    margin: 0px;
+    padding: 0px;
+    border-spacing: 0px;
+    text-align: left;
+    vertical-align: top;
 }
 
-.highlightTextColor {
-    color: rgb(191, 249, 255);
+button {
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+    width: 100px;
+    height: 100px;
+    font-family: inherit;
+    font-size: inherit;
+    color: #b1ced1;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #b1ced1;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
 }
 
-#topLevelTable {
-    display: table;
+#box-1 {
     margin: auto;
-    padding: 0px;
-    width: 1600px;
+    width: 1420px;
+    height: 1000px;
+    position: relative;
 }
 
-.topLevelRow {
-    display: table-row;
-    margin: 0px;
-    padding: 0px;
-}
-
-.topLevelCell1 {
-    display: table-cell;
-    margin: 0px;
-    padding: 0px;
-    width: 1000px;
-    vertical-align: top;
-}
-
-.topLevelCell2 {
-    display: table-cell;
-    margin: 0px;
-    padding: 0px;
-    width: 600px;
-    vertical-align: top;
-}
-
-#mainDisplay {
-    display: block;
+#main-display {
     margin: 0px;
     padding: 0px;
     width: 1000px;
     height: 1000px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 
-#mainPanel {
-    display: table;
-    margin: 0px 0px 0px 20px;
-    padding: 0px;
-    width: 600px;
-    font-family: 'Luckiest Guy', cursive;
-    font-size: 28pt;
+#info-panel {
+    margin: auto;
+    width: 400px;
+    height: auto;
+    position: absolute;
+    left: 1020px;
+    top: 20px;
 }
 
-.mainPanelRow {
-    display: table-row;
-    margin: 0px;
-    padding: 0px;
+#info-panel table {
+    width: 100%;
 }
 
-.mainPanelCell1 {
-    display: block;
-    margin: 20px 0px 0px 0px;
-    padding: 0px;
-    text-align: left;
+#info-panel td {
+    height: 46px;
 }
 
-.mainPanelCell2 {
-    display: block;
-    margin: 0px;
-    padding: 0px;
+.info-highlight {
+    color: rgb(191, 249, 255);
     text-align: right;
 }
 
-@media ( max-width: 1600px) {
-    #topLevelTable {
-        width: 1000px;
+#button-panel {
+    width: 400px;
+    height: auto;
+    position: absolute;
+    left: 1020px;
+    top: 316px;
+}
+
+#button-panel table {
+    margin: auto;
+}
+
+#button-panel td {
+    padding: 5px;
+}
+
+#message-panel {
+    width: 400px;
+    height: auto;
+    position: absolute;
+    left: 1020px;
+    top: 556px;
+}
+
+#message-panel table {
+    width: 100%;
+}
+
+#message-panel td {
+    height: 60px;
+}
+
+#line-2 {
+    text-align: right;
+}
+
+.key {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px 10px;
+    min-width: 30px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #b1ced1;
+    border-radius: 10px;
+    text-align: center;
+}
+
+@media ( max-width: 1420px) {
+    #box-1 {
+        width: 900px;
+        height: 1280px;
     }
-    .topLevelCell1 {
-        display: block;
-        width: 1000px;
+    #main-display {
+        width: 900px;
+        height: 900px;
     }
-    .topLevelCell2 {
-        display: block;
-        width: 1000px;
+    #info-panel {
+        left: 0px;
+        top: 920px;
     }
-    #mainPanel {
-        margin: 0px;
-        width: 1000px;
+    #button-panel {
+        left: 500px;
+        top: 920px;
+    }
+    #message-panel {
+        left: 500px;
+        top: 1160px;
     }
 }
 
-@media ( max-width: 1000px) {
-    #topLevelTable {
-        width: 600px;
+@media ( max-width: 900px) {
+    body {
+        font-size: 18pt;
     }
-    .topLevelCell1 {
-        display: block;
-        width: 600px;
+    button {
+        width: 60px;
+        height: 60px;
+        border-width: 3px;
+        border-radius: 6px;
     }
-    .topLevelCell2 {
-        display: block;
+    #box-1 {
         width: 600px;
+        height: 832px;
     }
-    #mainDisplay {
+    #main-display {
         width: 600px;
         height: 600px;
     }
-    #mainPanel {
-        width: 600px;
-        font-size: 18pt;
+    #info-panel {
+        width: 270px;
+        left: 0px;
+        top: 610px;
     }
-    .mainPanelCell1 {
-        margin: 10px 0px 0px 0px;
+    #info-panel td {
+        height: 30px;
+    }
+    #button-panel {
+        width: 270px;
+        left: 330px;
+        top: 610px;
+    }
+    #button-panel td {
+        padding: 3px;
+    }
+    #message-panel {
+        width: 270px;
+        left: 330px;
+        top: 752px;
+    }
+    #message-panel td {
+        height: 40px;
+    }
+    .key {
+        padding: 0px 6px;
+        min-width: 18px;
+        border-width: 3px;
+        border-radius: 6px;
     }
 }
 
 @media ( max-width: 600px) {
-    #topLevelTable {
-        width: 300px;
+    body {
+        font-size: 12pt;
     }
-    .topLevelCell1 {
-        display: block;
-        width: 300px;
+    button {
+        width: 40px;
+        height: 40px;
+        border-width: 2px;
+        border-radius: 4px;
     }
-    .topLevelCell2 {
-        display: block;
+    #box-1 {
         width: 300px;
+        height: 571px;
     }
-    #mainDisplay {
+    #main-display {
         width: 300px;
         height: 300px;
     }
-    #mainPanel {
+    #info-panel {
         width: 300px;
-        font-weight: normal;
-        font-size: 12pt;
+        left: 0px;
+        top: 305px;
     }
-    .mainPanelCell1 {
-        margin: 0px;
+    #info-panel td {
+        height: 20px;
+    }
+    #button-panel {
+        width: 300px;
+        left: 0px;
+        top: 430px;
+    }
+    #button-panel td {
+        padding: 2px;
+    }
+    #message-panel {
+        width: 300px;
+        left: 0px;
+        top: 523px;
+    }
+    #message-panel td {
+        height: 24px;
+    }
+    .key {
+        padding: 0px 3px;
+        min-width: 14px;
+        border-width: 2px;
+        border-radius: 4px;
     }
 }

@@ -1,6 +1,7 @@
 ![](https://raw.githubusercontent.com/catfacetaro/Warehouse/master/wwwroot/icon.png)
 
 # Warehouse
+Version 1.1
 Sokoban clone in HTML / CSS / Javascript
 
 ### Play

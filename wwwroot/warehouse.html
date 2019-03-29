@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 
 <!--
-/**
+/*
  * Copyright 2019, Cat Face Taro
  * 
  * This file is part of Warehouse.
@@ -50,51 +50,53 @@
 </head>
 
 <body>
-    <div id="topLevelTable">
-        <div class="topLevelRow">
-            <div class="topLevelCell1">
-                <canvas id="mainDisplay"></canvas>
-            </div>
-            <div class="topLevelCell2">
-                <div id="mainPanel">
-                    <div class="mainPanelRow">
-                        <div class="mainPanelCell1 normalTextColor">Moves</div>
-                        <div class="mainPanelCell2 highlightTextColor" id="movesDisplay"></div>
-                    </div>
-                    <div class="mainPanelRow">
-                        <div class="mainPanelCell1 normalTextColor">Level Set</div>
-                        <div class="mainPanelCell2 highlightTextColor" id="levelSetDisplay"></div>
-                    </div>
-                    <div class="mainPanelRow">
-                        <div class="mainPanelCell1 normalTextColor">Level</div>
-                        <div class="mainPanelCell2 highlightTextColor" id="levelDisplay"></div>
-                    </div>
-                    <div class="mainPanelRow">
-                        <div class="mainPanelCell1 normalTextColor">Change Level Set</div>
-                        <div class="mainPanelCell2 normalTextColor">Ctrl <i class="fas fa-long-arrow-alt-up"></i>, Ctrl
-                            <i class="fas fa-long-arrow-alt-down"></i></div>
-                    </div>
-                    <div class="mainPanelRow">
-                        <div class="mainPanelCell1 normalTextColor">Change Level</div>
-                        <div class="mainPanelCell2 normalTextColor">Ctrl <i class="fas fa-long-arrow-alt-left"></i>,
-                            Ctrl <i class="fas fa-long-arrow-alt-right"></i></div>
-                    </div>
-                    <div class="mainPanelRow">
-                        <div class="mainPanelCell1 normalTextColor">Reset Level</div>
-                        <div class="mainPanelCell2 normalTextColor">Ctrl Enter</div>
-                    </div>
-                    <div class="mainPanelRow">
-                        <div class="mainPanelCell1 normalTextColor">Move</div>
-                        <div class="mainPanelCell2 normalTextColor"><i class="fas fa-long-arrow-alt-up"></i>, <i
-                                class="fas fa-long-arrow-alt-down"></i>, <i class="fas fa-long-arrow-alt-left"></i>, <i
-                                class="fas fa-long-arrow-alt-right"></i></div>
-                    </div>
-                    <div class="mainPanelRow">
-                        <div class="mainPanelCell1  normalTextColor">Undo Move</div>
-                        <div class="mainPanelCell2  normalTextColor">Backspace</div>
-                    </div>
-                </div>
-            </div>
+    <div id="box-1">
+        <canvas id="main-display"></canvas>
+        <div id="info-panel">
+            <table>
+                <tr>
+                    <td>Moves</td>
+                </tr>
+                <tr>
+                    <td id="moves-display" class="info-highlight"><br></td>
+                </tr>
+                <tr>
+                    <td>Set</td>
+                </tr>
+                <tr>
+                    <td id="set-display" class="info-highlight"></td>
+                </tr>
+                <tr>
+                    <td>Level</td>
+                </tr>
+                <tr>
+                    <td id="level-display" class="info-highlight"></td>
+                </tr>
+            </table>
+        </div>
+        <div id="button-panel">
+            <table>
+                <tr>
+                    <td><button id="reset-level-button"><i class="fas fa-undo"></i></button></td>
+                    <td><button id="prev-set-button"><i class="fas fa-fast-backward"></i></button></td>
+                    <td><button id="next-set-button"><i class="fas fa-fast-forward"></i></button></td>
+                </tr>
+                <tr>
+                    <td><button id="undo-move-button"><i class="fas fa-arrow-left"></i></button></td>
+                    <td><button id="prev-level-button"><i class="fas fa-step-backward"></i></button></td>
+                    <td><button id="next-level-button"><i class="fas fa-step-forward"></i></button></td>
+                </tr>
+            </table>
+        </div>
+        <div id="message-panel">
+            <table>
+                <tr>
+                    <td id="line-1"></td>
+                </tr>
+                <tr>
+                    <td id="line-2"></td>
+                </tr>
+            </table>
         </div>
     </div>
 </body>
