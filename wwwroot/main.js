@@ -79,7 +79,7 @@ var main = function () {
     // listen to events
     mainModel.addEventListener( "stateChanged", updateMainPanel );
     window.addEventListener( "keydown", handleKey );
-    mainDisplayElement.addEventListener( "pointerup", handleMove );
+    mainDisplayElement.addEventListener( "mouseup", handleMove );
     buttonDataMap.forEach( item => {
         item.element.addEventListener( "click", handleButton );
         item.element.addEventListener( "mouseover", handleButton );
@@ -146,8 +146,9 @@ var handleKey = function ( event ) {
 }
 
 var handleMove = function ( event ) {
+    console.log( event );
     if ( event.currentTarget.id === "main-display" ) {
-        if ( event.type === "pointerup" ) {
+        if ( event.type === "mouseup" ) {
             var pos = {};
             pos.x = event.offsetX;
             pos.y = event.offsetY;
