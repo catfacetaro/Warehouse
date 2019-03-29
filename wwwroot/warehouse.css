@@ -123,29 +123,13 @@ button {
 }
 
 #message-panel td {
-    height: 60px;
-}
-
-#line-2 {
-    text-align: right;
-}
-
-.key {
-    display: inline-block;
-    margin: 0px;
-    padding: 0px 10px;
-    min-width: 30px;
-    border-style: solid;
-    border-width: 5px;
-    border-color: #b1ced1;
-    border-radius: 10px;
-    text-align: center;
+    height: 46px;
 }
 
 @media ( max-width: 1420px) {
     #box-1 {
         width: 900px;
-        height: 1280px;
+        height: 1252px;
     }
     #main-display {
         width: 900px;
@@ -177,7 +161,7 @@ button {
     }
     #box-1 {
         width: 600px;
-        height: 832px;
+        height: 812px;
     }
     #main-display {
         width: 600px;
@@ -205,13 +189,7 @@ button {
         top: 752px;
     }
     #message-panel td {
-        height: 40px;
-    }
-    .key {
-        padding: 0px 6px;
-        min-width: 18px;
-        border-width: 3px;
-        border-radius: 6px;
+        height: 30px;
     }
 }
 
@@ -227,7 +205,7 @@ button {
     }
     #box-1 {
         width: 300px;
-        height: 571px;
+        height: 563px;
     }
     #main-display {
         width: 300px;
@@ -255,12 +233,6 @@ button {
         top: 523px;
     }
     #message-panel td {
-        height: 24px;
-    }
-    .key {
-        padding: 0px 3px;
-        min-width: 14px;
-        border-width: 2px;
-        border-radius: 4px;
+        height: 20px;
     }
 }
