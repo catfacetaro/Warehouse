@@ -1,6 +1,6 @@
 {
     "name": "generate_levels",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Tool to generate levels.js from .slc files in slc folder.",
     "main": "generate_levels.js",
     "author": "Cat Face Taro",
