@@ -1,0 +1,32 @@
+{
+  "name": "warehouse",
+  "version": "2.0",
+  "description": "",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "clean": "node dev/build.mjs clean",
+    "build": "node dev/build.mjs clean genlevels genindex minify",
+    "minify": "node dev/build.mjs clean minify",
+    "copy": "node dev/build.mjs clean copy",
+    "genlevels": "node dev/build.mjs genlevels",
+    "genindex": "node dev/build.mjs genindex",
+    "server": "node dev/server.mjs",
+    "start": "node dev/server.mjs"
+  },
+  "author": "catfacetaro",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "clean-css": "^5.3.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "fast-xml-parser": "^4.3.2",
+    "html-minifier-terser": "^7.2.0",
+    "http-terminator": "^3.2.0",
+    "jsdom": "^22.1.0",
+    "sass": "^1.69.5",
+    "showdown": "^2.1.0",
+    "terser": "^5.24.0"
+  }
+}

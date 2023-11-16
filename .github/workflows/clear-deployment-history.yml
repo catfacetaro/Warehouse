@@ -1,0 +1,13 @@
+name: Clear Deployment History
+run-name: Clear Deployment History (${{ github.actor }})
+on: [workflow_dispatch]
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: strumwolf/delete-deployment-environment@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: github-pages
+          onlyRemoveDeployments: true

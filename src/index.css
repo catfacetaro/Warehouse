@@ -1,0 +1,48 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+  font-size: calc(10px * var(--f));
+}
+
+#container {
+  margin: 0px auto;
+  padding: 0px;
+  max-width: calc(360px * var(--f));
+}
+
+img:first-child {
+  margin: 0px;
+  padding: 0px;
+  width: calc(64px * var(--f));
+}
+
+code {
+  background-color: #dfdfdf;
+}
+
+li {
+  margin: calc(4px * var(--f)) 0px;
+}
+
+:root {
+  --f: 1;
+}
+
+@media (min-width: 540px) {
+  :root {
+    --f: 1.5;
+  }
+}
+
+@media (min-width: 720px) {
+  :root {
+    --f: 2;
+  }
+}
+
+@media (min-width: 1080px) {
+  :root {
+    --f: 3;
+  }
+}

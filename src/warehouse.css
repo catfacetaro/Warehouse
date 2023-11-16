@@ -1,0 +1,402 @@
+*:focus {
+  outline: none;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #758c8e;
+  font-family: 'Luckiest Guy', sans-serif;
+  color: #b1ced1;
+  user-select: none;
+}
+
+#canvas-state-display {
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  left: var(--display-x);
+  top: var(--display-y);
+  width: var(--display-w);
+  height: var(--display-h);
+}
+
+#label-set,
+#label-level,
+#label-moves,
+#label-set-name,
+#label-level-name,
+#label-moves-count {
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  vertical-align: top;
+  overflow: hidden;
+  white-space: nowrap;
+  width: var(--label-w);
+  height: var(--label-h);
+  font-size: var(--fontsize);
+}
+
+#label-set,
+#label-level,
+#label-moves {
+  color: #b1ced1;
+  text-align: left;
+}
+
+#label-set-name,
+#label-level-name,
+#label-moves-count {
+  color: #bff9ff;
+  text-align: right;
+}
+
+#label-set,
+#label-set-name {
+  left: var(--label-x);
+  top: var(--label-set-y);
+}
+
+#label-level,
+#label-level-name {
+  left: var(--label-x);
+  top: var(--label-level-y);
+}
+
+#label-moves,
+#label-moves-count {
+  left: var(--label-x);
+  top: var(--label-moves-y);
+}
+
+#btn-move-up,
+#btn-move-down,
+#btn-move-left,
+#btn-move-right,
+#btn-previous-level,
+#btn-next-level,
+#btn-previous-set,
+#btn-next-set,
+#btn-restart,
+#btn-undo {
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  width: var(--btn-w);
+  height: var(--btn-h);
+}
+
+#btn-move-left {
+  left: var(--btn-move-left-x);
+  top: var(--btn-move-left-y);
+}
+
+#btn-move-right {
+  left: var(--btn-move-right-x);
+  top: var(--btn-move-right-y);
+}
+
+#btn-move-up {
+  left: var(--btn-move-up-x);
+  top: var(--btn-move-up-y);
+}
+
+#btn-move-down {
+  left: var(--btn-move-down-x);
+  top: var(--btn-move-down-y);
+}
+
+#btn-restart {
+  left: var(--btn-restart-x);
+  top: var(--btn-restart-y);
+}
+
+#btn-undo {
+  left: var(--btn-undo-x);
+  top: var(--btn-undo-y);
+}
+
+#btn-next-set {
+  left: var(--btn-next-set-x);
+  top: var(--btn-next-set-y);
+}
+
+#btn-previous-set {
+  left: var(--btn-previous-set-x);
+  top: var(--btn-previous-set-y);
+}
+
+#btn-next-level {
+  left: var(--btn-next-level-x);
+  top: var(--btn-next-level-y);
+}
+
+#btn-previous-level {
+  left: var(--btn-previous-level-x);
+  top: var(--btn-previous-level-y);
+}
+
+:root {
+  --f: 1;
+  --landscape: 0;
+
+  --h: min(1, max(0, var(--landscape)));
+  --v: calc(1 - var(--h));
+
+  --size: calc(var(--f) * 360px);
+  --gap-x: calc(var(--f) * 4px);
+  --gap-y: calc(var(--f) * 4px);
+  --fontsize: calc(var(--f) * 18px);
+
+  --total-w: calc(var(--size) + var(--h) * var(--size) * 0.6);
+  --total-h: calc(var(--size) + var(--v) * var(--label-dy) * 3 + var(--v) * var(--btn-dy));
+
+  --offset-x: max(0px, calc(50% - var(--total-w) * 0.5));
+  --offset-y: 0px;
+
+  --label-h-w: calc(var(--size) * 0.6 - var(--gap-x));
+  --label-v-w: calc(var(--size) - var(--gap-x) - var(--gap-x));
+  --label-w: calc(var(--h) * var(--label-h-w) + var(--v) * var(--label-v-w));
+  --label-h: var(--fontsize);
+  --label-x: calc(var(--offset-x) + var(--gap-x) + var(--h) * (var(--size) - var(--gap-x)));
+  --label-dy: calc(var(--label-h) + var(--gap-y));
+  --label-set-y: calc(var(--offset-y) + var(--gap-y));
+  --label-level-y: calc(var(--offset-y) + var(--gap-y) + var(--label-dy));
+  --label-moves-y: calc(var(--offset-y) + var(--gap-y) + var(--label-dy) + var(--label-dy));
+
+  --display-x: calc(var(--offset-x) + var(--gap-x));
+  --display-y: calc(var(--offset-y) + var(--gap-y) + var(--v) * var(--label-dy) * 3);
+  --display-w: calc(var(--size) - var(--gap-x) - var(--gap-x));
+  --display-h: var(--display-w);
+
+  --btn-h-w: calc(var(--size) * 0.6 / 6 - var(--gap-x));
+  --btn-v-w: calc((var(--size) - var(--gap-x)) / 10 - var(--gap-x));
+  --btn-w: calc(var(--h) * var(--btn-h-w) + var(--v) * var(--btn-v-w));
+  --btn-h: var(--btn-w);
+
+  --btn-dx: calc(var(--btn-w) + var(--gap-x));
+  --btn-dy: calc(var(--btn-h) + var(--gap-y));
+  --btn-start-x: var(--label-x);
+  --btn-start-y: calc(var(--total-h) - var(--h) * var(--btn-dy) * 2 - var(--v) * var(--btn-dy));
+
+  --btn-move-left-c: calc(var(--h) * 0 + var(--v) * 0);
+  --btn-move-left-r: calc(var(--h) * 1 + var(--v) * 0);
+  --btn-move-left-x: calc(var(--btn-start-x) + var(--btn-move-left-c) * var(--btn-dx));
+  --btn-move-left-y: calc(var(--btn-start-y) + var(--btn-move-left-r) * var(--btn-dy));
+
+  --btn-move-right-c: calc(var(--h) * 2 + var(--v) * 1);
+  --btn-move-right-r: calc(var(--h) * 1 + var(--v) * 0);
+  --btn-move-right-x: calc(var(--btn-start-x) + var(--btn-move-right-c) * var(--btn-dx));
+  --btn-move-right-y: calc(var(--btn-start-y) + var(--btn-move-right-r) * var(--btn-dy));
+
+  --btn-move-up-c: calc(var(--h) * 1 + var(--v) * 2);
+  --btn-move-up-r: calc(var(--h) * 0 + var(--v) * 0);
+  --btn-move-up-x: calc(var(--btn-start-x) + var(--btn-move-up-c) * var(--btn-dx));
+  --btn-move-up-y: calc(var(--btn-start-y) + var(--btn-move-up-r) * var(--btn-dy));
+
+  --btn-move-down-c: calc(var(--h) * 1 + var(--v) * 3);
+  --btn-move-down-r: calc(var(--h) * 1 + var(--v) * 0);
+  --btn-move-down-x: calc(var(--btn-start-x) + var(--btn-move-down-c) * var(--btn-dx));
+  --btn-move-down-y: calc(var(--btn-start-y) + var(--btn-move-down-r) * var(--btn-dy));
+
+  --btn-restart-c: calc(var(--h) * 3 + var(--v) * 4);
+  --btn-restart-r: calc(var(--h) * 0 + var(--v) * 0);
+  --btn-restart-x: calc(var(--btn-start-x) + var(--btn-restart-c) * var(--btn-dx));
+  --btn-restart-y: calc(var(--btn-start-y) + var(--btn-restart-r) * var(--btn-dy));
+
+  --btn-undo-c: calc(var(--h) * 3 + var(--v) * 5);
+  --btn-undo-r: calc(var(--h) * 1 + var(--v) * 0);
+  --btn-undo-x: calc(var(--btn-start-x) + var(--btn-undo-c) * var(--btn-dx));
+  --btn-undo-y: calc(var(--btn-start-y) + var(--btn-undo-r) * var(--btn-dy));
+
+  --btn-previous-set-c: calc(var(--h) * 4 + var(--v) * 6);
+  --btn-previous-set-r: calc(var(--h) * 1 + var(--v) * 0);
+  --btn-previous-set-x: calc(var(--btn-start-x) + var(--btn-previous-set-c) * var(--btn-dx));
+  --btn-previous-set-y: calc(var(--btn-start-y) + var(--btn-previous-set-r) * var(--btn-dy));
+
+  --btn-next-set-c: calc(var(--h) * 5 + var(--v) * 9);
+  --btn-next-set-r: calc(var(--h) * 1 + var(--v) * 0);
+  --btn-next-set-x: calc(var(--btn-start-x) + var(--btn-next-set-c) * var(--btn-dx));
+  --btn-next-set-y: calc(var(--btn-start-y) + var(--btn-next-set-r) * var(--btn-dy));
+
+  --btn-previous-level-c: calc(var(--h) * 4 + var(--v) * 7);
+  --btn-previous-level-r: calc(var(--h) * 0 + var(--v) * 0);
+  --btn-previous-level-x: calc(var(--btn-start-x) + var(--btn-previous-level-c) * var(--btn-dx));
+  --btn-previous-level-y: calc(var(--btn-start-y) + var(--btn-previous-level-r) * var(--btn-dy));
+
+  --btn-next-level-c: calc(var(--h) * 5 + var(--v) * 8);
+  --btn-next-level-r: calc(var(--h) * 0 + var(--v) * 0);
+  --btn-next-level-x: calc(var(--btn-start-x) + var(--btn-next-level-c) * var(--btn-dx));
+  --btn-next-level-y: calc(var(--btn-start-y) + var(--btn-next-level-r) * var(--btn-dy));
+}
+
+/* 
+  f = 1
+  min-width = 360px * f * 1.6 = 576px
+  last min-height = 576px * 1.2 = 692px
+  last min-height f = 576px / 360
+*/
+@media (min-width: 576px) {
+  :root {
+    --f: 1;
+    --landscape: 1;
+  }
+
+  @media (min-height: 692px) {
+    :root {
+      --f: 1.6;
+      --landscape: 0;
+    }
+  }
+}
+
+/* 
+  f = 1.5
+  min-width = 360px * f * 1.6 = 864px
+  last min-height = 864px * 1.2 = 1037px
+  last min-height f = 864px / 360
+*/
+@media (min-width: 864px) {
+  :root {
+    --f: 1;
+    --landscape: 1;
+  }
+
+  @media (min-height: 540px) {
+    :root {
+      --f: 1.5;
+      --landscape: 1;
+    }
+  }
+
+  @media (min-height: 1037px) {
+    :root {
+      --f: 2.4;
+      --landscape: 0;
+    }
+  }
+}
+
+/* 
+  f = 2
+  min-width = 360px * f * 1.6 = 1152px
+  last min-height = 1152px * 1.2 = 1383px
+  last min-height f = 1152px / 360
+*/
+@media (min-width: 1152px) {
+  :root {
+    --f: 1;
+    --landscape: 1;
+  }
+
+  @media (min-height: 540px) {
+    :root {
+      --f: 1.5;
+      --landscape: 1;
+    }
+  }
+
+  @media (min-height: 720px) {
+    :root {
+      --f: 2;
+      --landscape: 1;
+    }
+  }
+
+  @media (min-height: 1383px) {
+    :root {
+      --f: 3.2;
+      --landscape: 0;
+    }
+  }
+}
+
+/* 
+  f = 3
+  min-width = 360px * f * 1.6 = 1728px
+  last min-height = 1728px * 1.2 = 2074px
+  last min-height f = 1728px / 360
+*/
+@media (min-width: 1728px) {
+  :root {
+    --f: 1;
+    --landscape: 1;
+  }
+
+  @media (min-height: 540px) {
+    :root {
+      --f: 1.5;
+      --landscape: 1;
+    }
+  }
+
+  @media (min-height: 720px) {
+    :root {
+      --f: 2;
+      --landscape: 1;
+    }
+  }
+
+  @media (min-height: 1080px) {
+    :root {
+      --f: 3;
+      --landscape: 1;
+    }
+  }
+
+  @media (min-height: 2074px) {
+    :root {
+      --f: 4.8;
+      --landscape: 0;
+    }
+  }
+}
+
+/* 
+  f = 4 
+  min-width = 360px * f * 1.6 = 2304px
+  last min-height = 2304px * 1.2 = 2765px
+  last min-height f = 2304px / 360
+*/
+@media (min-width: 2304px) {
+  :root {
+    --f: 1;
+    --landscape: 1;
+  }
+
+  @media (min-height: 540px) {
+    :root {
+      --f: 1.5;
+      --landscape: 1;
+    }
+  }
+
+  @media (min-height: 720px) {
+    :root {
+      --f: 2;
+      --landscape: 1;
+    }
+  }
+
+  @media (min-height: 1080px) {
+    :root {
+      --f: 3;
+      --landscape: 1;
+    }
+  }
+
+  @media (min-height: 1440px) {
+    :root {
+      --f: 4;
+      --landscape: 1;
+    }
+  }
+
+  @media (min-height: 2765x) {
+    :root {
+      --f: 6.4;
+      --landscape: 0;
+    }
+  }
+}

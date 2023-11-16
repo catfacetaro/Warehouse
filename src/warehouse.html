@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <title>Warehouse</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap">
+    <link rel="stylesheet" href="warehouse.css">
+
+    <script type="module" src="warehouse.mjs"></script>
+  </head>
+
+  <body>
+    <div id="label-set">Set:</div>
+    <div id="label-set-name"></div>
+    <div id="label-level">Level:</div>
+    <div id="label-level-name"></div>
+    <div id="label-moves">Moves:</div>
+    <div id="label-moves-count"></div>
+
+    <canvas id="canvas-state-display" width="1000px" height="1000px"></canvas>
+
+    <svg id="btn-move-up" viewBox="0 0 24 24">
+      <path d="M 4 1 L 20 1 Q 23 1 23 4 L 23 20 Q 23 23 20 23 L 4 23 Q 1 23 1 20 L 1 4 Q 1 1 4 1" stroke="#b1ced1" stroke-width="2" stroke-linecap="round"
+        fill="#758c8e" />
+      <path d="M 16 11 L 12 7 L 8 11 M 12 17 L 12 8" stroke="#b1ced1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="transparent" />
+    </svg>
+    <svg id="btn-move-down" viewBox="0 0 24 24">
+      <path d="M 4 1 L 20 1 Q 23 1 23 4 L 23 20 Q 23 23 20 23 L 4 23 Q 1 23 1 20 L 1 4 Q 1 1 4 1" stroke="#b1ced1" stroke-width="2" stroke-linecap="round"
+        fill="#758c8e" />
+      <path d="M 8 13 L 12 17 L 16 13 M 12 7 L 12 16" stroke="#b1ced1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="transparent" />
+    </svg>
+    <svg id="btn-move-left" viewBox="0 0 24 24">
+      <path d="M 4 1 L 20 1 Q 23 1 23 4 L 23 20 Q 23 23 20 23 L 4 23 Q 1 23 1 20 L 1 4 Q 1 1 4 1" stroke="#b1ced1" stroke-width="2" stroke-linecap="round"
+        fill="#758c8e" />
+      <path d="M 11 8 L 7 12 L 11 16 M 17 12 L 8 12" stroke="#b1ced1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="transparent" />
+    </svg>
+    <svg id="btn-move-right" viewBox="0 0 24 24">
+      <path d="M 4 1 L 20 1 Q 23 1 23 4 L 23 20 Q 23 23 20 23 L 4 23 Q 1 23 1 20 L 1 4 Q 1 1 4 1" stroke="#b1ced1" stroke-width="2" stroke-linecap="round"
+        fill="#758c8e" />
+      <path d="M 13 16 L 17 12 L 13 8 M 7 12 L 16 12" stroke="#b1ced1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="transparent" />
+    </svg>
+    <svg id="btn-restart" viewBox="0 0 24 24">
+      <path d="M 4 1 L 20 1 Q 23 1 23 4 L 23 20 Q 23 23 20 23 L 4 23 Q 1 23 1 20 L 1 4 Q 1 1 4 1" stroke="#b1ced1" stroke-width="2" stroke-linecap="round"
+        fill="#758c8e" />
+      <path
+        d="M 5 7.833 L 9.222 7.833 L 9.222 12.056 M 12 7 C 14.761 7 17 9.238 17 12 C 17 14.761 14.761 17 12 17 C 9.238 17 7 14.761 7 12 C 7 10.429 7.724 9.028 8.857 8.111"
+        stroke="#b1ced1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="transparent" />
+    </svg>
+    <svg id="btn-undo" viewBox="0 0 24 24">
+      <path d="M 4 1 L 20 1 Q 23 1 23 4 L 23 20 Q 23 23 20 23 L 4 23 Q 1 23 1 20 L 1 4 Q 1 1 4 1" stroke="#b1ced1" stroke-width="2" stroke-linecap="round"
+        fill="#758c8e" />
+      <path d="M10 7 L 7 10 L 10 13 M8 10 L 13.5 10 C 15.433 10 17 11.567 17 13.5 V 13.5 C 17 15.433 15.433 17 13.5 17 L 12 17" stroke="#b1ced1"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="transparent" />
+    </svg>
+    <svg id="btn-previous-level" viewBox="0 0 24 24">
+      <path d="M 4 1 L 20 1 Q 23 1 23 4 L 23 20 Q 23 23 20 23 L 4 23 Q 1 23 1 20 L 1 4 Q 1 1 4 1" stroke="#b1ced1" stroke-width="2" stroke-linecap="round"
+        fill="#758c8e" />
+      <path d="M 14 16 L 8 12 L 14 8" stroke="#b1ced1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="transparent" />
+    </svg>
+    <svg id="btn-next-level" viewBox="0 0 24 24">
+      <path d="M 4 1 L 20 1 Q 23 1 23 4 L 23 20 Q 23 23 20 23 L 4 23 Q 1 23 1 20 L 1 4 Q 1 1 4 1" stroke="#b1ced1" stroke-width="2" stroke-linecap="round"
+        fill="#758c8e" />
+      <path d="M 10 8 L 16 12 L 10 16" stroke="#b1ced1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="transparent" />
+    </svg>
+    <svg id="btn-previous-set" viewBox="0 0 24 24">
+      <path d="M 4 1 L 20 1 Q 23 1 23 4 L 23 20 Q 23 23 20 23 L 4 23 Q 1 23 1 20 L 1 4 Q 1 1 4 1" stroke="#b1ced1" stroke-width="2" stroke-linecap="round"
+        fill="#758c8e" />
+      <path d="M 11 16 L 6 12 L 11 8 M 17 16 L 12 12 L 17 8" stroke="#b1ced1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        fill="transparent" />
+    </svg>
+    <svg id="btn-next-set" viewBox="0 0 24 24">
+      <path d="M 4 1 L 20 1 Q 23 1 23 4 L 23 20 Q 23 23 20 23 L 4 23 Q 1 23 1 20 L 1 4 Q 1 1 4 1" stroke="#b1ced1" stroke-width="2" stroke-linecap="round"
+        fill="#758c8e" />
+      <path d="M 7 8 L 12 12 L 7 16 M 13 8 L 18 12 L 13 16" stroke="#b1ced1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        fill="transparent" />
+    </svg>
+  </body>
+
+</html>
