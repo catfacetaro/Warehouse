@@ -7,7 +7,7 @@
   },
   "scripts": {
     "clean": "node dev/build.mjs clean",
-    "build": "node dev/build.mjs clean genlevels genindex minify",
+    "build": "node dev/build.mjs clean genlevels minify",
     "minify": "node dev/build.mjs clean minify",
     "copy": "node dev/build.mjs clean copy",
     "genlevels": "node dev/build.mjs genlevels",

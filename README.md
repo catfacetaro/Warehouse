@@ -1,11 +1,11 @@
-![](svg/icon.svg)
+![](https://catfacetaro.github.io/Warehouse/svg/icon.svg)
 
 # Warehouse
 ### Version 2.0
 Sokoban clone implemented using HTML / CSS / Javascript
 
 ### Play online
-- Click [here](warehouse.html) to play.
+- Click [here](https://catfacetaro.github.io/Warehouse/warehouse.html) to play.
 
 ### Keys
 - Arrow keys to control the player.
