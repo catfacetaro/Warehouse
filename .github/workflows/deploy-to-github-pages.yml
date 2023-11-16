@@ -1,5 +1,4 @@
 name: Deploy to GitHub Pages
-run-name: Deploy to GitHub Pages (${{ github.actor }})
 on: [workflow_dispatch]
 jobs:
   deploy:

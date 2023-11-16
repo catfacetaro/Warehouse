@@ -1,5 +1,4 @@
-name: Clear Deployment History
-run-name: Clear Deployment History (${{ github.actor }})
+name: Clear deployment history
 on: [workflow_dispatch]
 jobs:
   cleanup:
