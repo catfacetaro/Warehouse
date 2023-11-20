@@ -1,4 +1,4 @@
-![](https://catfacetaro.github.io/Warehouse/icon.svg)
+![](https://catfacetaro.github.io/Warehouse/svg/icon.svg)
 
 # Warehouse
 ### Version 1.1
