@@ -16,8 +16,9 @@
  * along with Warehouse.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
+/* ======================================
  * Constants
+ * ======================================
  */
 const MOVE_UP = "u";
 const MOVE_DOWN = "d";
@@ -36,34 +37,3 @@ const BOX = "$"
 const BOX_ON_GOAL = "*"
 const GOAL = "."
 const EMPTY = " "
-
-/*
- * Images resources
- */
-const IMAGE_MAP = new Map();
-
-var _createImage = function ( key, url ) {
-    var img = new Image();
-    img.src = url;
-    IMAGE_MAP.set( key, img );
-}
-
-var _getImage = function ( key ) {
-    var img = IMAGE_MAP.get( key );
-    return ( img === undefined ) ? null : img;
-}
-
-_createImage( WALL, "wall.png" );
-_createImage( BOX, "box.png" );
-_createImage( BOX_ON_GOAL, "box_on_goal.png" );
-_createImage( GOAL, "goal.png" );
-_createImage( EMPTY, "empty.png" );
-_createImage( MOVE_UP, "player_back.png" );
-_createImage( MOVE_DOWN, "player_front.png" );
-_createImage( MOVE_LEFT, "player_left.png" );
-_createImage( MOVE_RIGHT, "player_right.png" );
-_createImage( PUSH_UP, "player_back.png" );
-_createImage( PUSH_DOWN, "player_front.png" );
-_createImage( PUSH_LEFT, "player_left.png" );
-_createImage( PUSH_RIGHT, "player_right.png" );
-_createImage( "solved", "solved.svg" );
