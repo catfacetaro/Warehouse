@@ -58,6 +58,20 @@ function processSlcFile( slcFile ) {
     }
 }
 
+function sortLevelFunc( a, b ) {
+    var titleA = a.title.toUpperCase();
+    var titleB = b.title.toUpperCase();
+    if ( titleA < titleB ) {
+        return -1;
+    }
+    else if ( titleA > titleB ) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
 function writeTargetFile( targetFilePath ) {
     var fileId = null;
     try {
@@ -108,6 +122,9 @@ if ( slcFiles.length <= 0 ) {
 // process each slc file
 var levelSetList = [];
 slcFiles.forEach( processSlcFile );
+
+// sort level set according to title
+levelSetList.sort( sortLevelFunc );
 
 // write target file
 if ( !writeTargetFile( TARGET_FILE ) ) {
