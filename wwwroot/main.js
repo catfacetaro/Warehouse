@@ -44,32 +44,32 @@ var main = function () {
     var buttonDataItem = {};
     buttonDataItem.element = document.getElementById( "reset-level-button" );
     buttonDataItem.msgLine1 = "Reset Level";
-    buttonDataItem.msgLine2 = "<div class=\"key\">Ctrl</div> + <div class=\"key\">Enter</div>";
+    buttonDataItem.msgLine2 = "Key: Ctrl + Enter";
     buttonDataMap.set( buttonDataItem.element.id, buttonDataItem );
     buttonDataItem = {};
     buttonDataItem.element = document.getElementById( "undo-move-button" );
     buttonDataItem.msgLine1 = "Undo Move";
-    buttonDataItem.msgLine2 = "<div class=\"key\">Backspace</div>";
+    buttonDataItem.msgLine2 = "Key: Backspace";
     buttonDataMap.set( buttonDataItem.element.id, buttonDataItem );
     buttonDataItem = {};
     buttonDataItem.element = document.getElementById( "prev-set-button" );
     buttonDataItem.msgLine1 = "Go To Previous Set";
-    buttonDataItem.msgLine2 = "<div class=\"key\">Ctrl</div> + <div class=\"key\"><i class=\"fas fa-long-arrow-alt-up\"></i></div>";
+    buttonDataItem.msgLine2 = "Key: Ctrl + <i class=\"fas fa-long-arrow-alt-up\"></i>";
     buttonDataMap.set( buttonDataItem.element.id, buttonDataItem );
     buttonDataItem = {};
     buttonDataItem.element = document.getElementById( "next-set-button" );
     buttonDataItem.msgLine1 = "Go To Next Set";
-    buttonDataItem.msgLine2 = "<div class=\"key\">Ctrl</div> + <div class=\"key\"><i class=\"fas fa-long-arrow-alt-down\"></i></div>";
+    buttonDataItem.msgLine2 = "Key: Ctrl + <i class=\"fas fa-long-arrow-alt-down\"></i>";
     buttonDataMap.set( buttonDataItem.element.id, buttonDataItem );
     buttonDataItem = {};
     buttonDataItem.element = document.getElementById( "prev-level-button" );
     buttonDataItem.msgLine1 = "Go To Previous Level";
-    buttonDataItem.msgLine2 = "<div class=\"key\">Ctrl</div> + <div class=\"key\"><i class=\"fas fa-long-arrow-alt-left\"></i></div>";
+    buttonDataItem.msgLine2 = "Key: Ctrl + <i class=\"fas fa-long-arrow-alt-left\"></i>";
     buttonDataMap.set( buttonDataItem.element.id, buttonDataItem );
     buttonDataItem = {};
     buttonDataItem.element = document.getElementById( "next-level-button" );
     buttonDataItem.msgLine1 = "Go To Next Level";
-    buttonDataItem.msgLine2 = "<div class=\"key\">Ctrl</div> + <div class=\"key\"><i class=\"fas fa-long-arrow-alt-right\"></i></div>";
+    buttonDataItem.msgLine2 = "Key: Ctrl + <i class=\"fas fa-long-arrow-alt-right\"></i>";
     buttonDataMap.set( buttonDataItem.element.id, buttonDataItem );
 
     // initialize message panel elements
