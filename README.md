@@ -1,19 +1,16 @@
-![](https://catfacetaro.github.io/Warehouse/wwwroot/icon.png)
+![](https://catfacetaro.github.io/Warehouse/icon.png)
 
 # Warehouse
 ### Version 1.1
 Sokoban clone in HTML / CSS / Javascript
 
-### Play
-- Click [here](https://catfacetaro.github.io/Warehouse/wwwroot/warehouse.html) to play.
-- Alternatively, open `warehouse.html` in `wwwroot` directory with Chrome browser locally.
-- Requires internet connection, because it uses free internet resources like Google Web Font and FontAwesome.
+### Play online
+- Click [here](https://catfacetaro.github.io/Warehouse/warehouse.html) to play.
 
 ### Levels
-.slc files contains Sokoban Levels, and can be downloaded from [here](https://www.sourcecode.se/sokoban/levels).
-
-To include new levels:
-- Put the .slc files in the `slc` folder.
+- Sokoban Levels (.slc files) can be downloaded from [here](https://www.sourcecode.se/sokoban/levels.php).
+- The .slc files needs to be converted into a Javascript script file using a node.js script.
+- Place the .slc files in the `slc` directory.
 - Go to `generate_levels` directory.
 - Run `npm install` to install any dependencies.
-- Run `node generate_level.js` to generate `levels.js` in the `wwwroot` directory.
+- Run `node generate_level.mjs` to generate the `levels.js` file in the `wwwroot` directory.

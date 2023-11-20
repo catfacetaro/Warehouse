@@ -1,0 +1,9 @@
+{
+    "html.format.wrapLineLength": 160,
+    "html.format.indentInnerHtml": true,
+    "editor.tabSize": 2,
+    "html.format.extraLiners": "",
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+}
