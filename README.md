@@ -6,6 +6,7 @@ Sokoban clone in HTML / CSS / Javascript
 ### Play
 - Open `warehouse.html` in `wwwroot` directory with Chrome browser locally.
 - Requires internet connection, because it uses free internet resources like Google Web Font and FontAwesome.
+- Alternatively, visit https://catfacetaro.github.io/Warehouse/wwwroot/warehouse.html
 
 ### Levels
 .slc files contains Sokoban Levels, and can be downloaded from http://www.sourcecode.se/sokoban/levels.
