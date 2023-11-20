@@ -23,7 +23,7 @@ import { XMLParser } from 'fast-xml-parser';
 const SOURCE_DIR = "../slc";
 const OUTPUT_FILE = "../wwwroot/levels.js";
 
-const FXP = new XMLParser();
+const FXP = new XMLParser( { ignoreAttributes: false, trimValues: false } );
 
 export function generateLevels( slcDir, outputFilePath ) {
     // get all slc file paths
@@ -39,7 +39,7 @@ export function generateLevels( slcDir, outputFilePath ) {
         var slcContent = FS.readFileSync( slcFilePath, 'utf8' );
 
         // convert to javascript object
-        var slcObj = FXP.parse( slcContent, { ignoreAttributes: false, trimValues: false } );
+        var slcObj = FXP.parse( slcContent );
 
         // create levelSet object
         var levelSet = {};
