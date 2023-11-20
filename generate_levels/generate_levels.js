@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2019, Cat Face Taro
  * 
  * This file is part of Warehouse.
