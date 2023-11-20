@@ -3,7 +3,7 @@
     "version": "1.1.0",
     "description": "Tool to generate levels.js from .slc files in slc folder.",
     "main": "generate_levels.js",
-    "author": "Cat Face Taro",
+    "author": "Catfa Cetaro",
     "license": "GPL-3.0-only",
     "dependencies": {
         "fast-xml-parser": "^4.3.2"
