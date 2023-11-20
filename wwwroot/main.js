@@ -146,7 +146,7 @@ var handleKey = function ( event ) {
 }
 
 var handleMove = function ( event ) {
-    console.log( event );
+    // console.log( event );
     if ( event.currentTarget.id === "main-display" ) {
         if ( event.type === "mouseup" ) {
             var pos = {};
