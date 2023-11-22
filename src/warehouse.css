@@ -150,7 +150,7 @@ body {
   --fontsize: calc(var(--f) * 18px);
 
   --total-w: calc(var(--size) + var(--h) * var(--size) * 0.6);
-  --total-h: calc(var(--size) + var(--v) * var(--label-dy) * 3 + var(--v) * var(--btn-dy));
+  --total-h: calc(var(--size) + var(--v) * var(--label-dy) * 3 + var(--v) * var(--btn-dy) * 2);
 
   --offset-x: max(0px, calc(50% - var(--total-w) * 0.5));
   --offset-y: 0px;
@@ -171,62 +171,62 @@ body {
   --display-h: var(--display-w);
 
   --btn-h-w: calc(var(--size) * 0.6 / 6 - var(--gap-x));
-  --btn-v-w: calc((var(--size) - var(--gap-x)) / 10 - var(--gap-x));
+  --btn-v-w: calc((var(--size) - var(--gap-x)) / 5 - var(--gap-x));
   --btn-w: calc(var(--h) * var(--btn-h-w) + var(--v) * var(--btn-v-w));
   --btn-h: var(--btn-w);
 
   --btn-dx: calc(var(--btn-w) + var(--gap-x));
   --btn-dy: calc(var(--btn-h) + var(--gap-y));
   --btn-start-x: var(--label-x);
-  --btn-start-y: calc(var(--total-h) - var(--h) * var(--btn-dy) * 2 - var(--v) * var(--btn-dy));
+  --btn-start-y: calc(var(--total-h) - var(--h) * var(--btn-dy) * 2 - var(--v) * var(--btn-dy) * 2);
 
   --btn-move-left-c: calc(var(--h) * 0 + var(--v) * 0);
-  --btn-move-left-r: calc(var(--h) * 1 + var(--v) * 0);
+  --btn-move-left-r: calc(var(--h) * 1 + var(--v) * 1);
   --btn-move-left-x: calc(var(--btn-start-x) + var(--btn-move-left-c) * var(--btn-dx));
   --btn-move-left-y: calc(var(--btn-start-y) + var(--btn-move-left-r) * var(--btn-dy));
 
   --btn-move-right-c: calc(var(--h) * 2 + var(--v) * 1);
-  --btn-move-right-r: calc(var(--h) * 1 + var(--v) * 0);
+  --btn-move-right-r: calc(var(--h) * 1 + var(--v) * 1);
   --btn-move-right-x: calc(var(--btn-start-x) + var(--btn-move-right-c) * var(--btn-dx));
   --btn-move-right-y: calc(var(--btn-start-y) + var(--btn-move-right-r) * var(--btn-dy));
 
-  --btn-move-up-c: calc(var(--h) * 1 + var(--v) * 2);
+  --btn-move-up-c: calc(var(--h) * 1 + var(--v) * 4);
   --btn-move-up-r: calc(var(--h) * 0 + var(--v) * 0);
   --btn-move-up-x: calc(var(--btn-start-x) + var(--btn-move-up-c) * var(--btn-dx));
   --btn-move-up-y: calc(var(--btn-start-y) + var(--btn-move-up-r) * var(--btn-dy));
 
-  --btn-move-down-c: calc(var(--h) * 1 + var(--v) * 3);
-  --btn-move-down-r: calc(var(--h) * 1 + var(--v) * 0);
+  --btn-move-down-c: calc(var(--h) * 1 + var(--v) * 4);
+  --btn-move-down-r: calc(var(--h) * 1 + var(--v) * 1);
   --btn-move-down-x: calc(var(--btn-start-x) + var(--btn-move-down-c) * var(--btn-dx));
   --btn-move-down-y: calc(var(--btn-start-y) + var(--btn-move-down-r) * var(--btn-dy));
 
-  --btn-restart-c: calc(var(--h) * 3 + var(--v) * 4);
+  --btn-restart-c: calc(var(--h) * 3 + var(--v) * 0);
   --btn-restart-r: calc(var(--h) * 0 + var(--v) * 0);
   --btn-restart-x: calc(var(--btn-start-x) + var(--btn-restart-c) * var(--btn-dx));
   --btn-restart-y: calc(var(--btn-start-y) + var(--btn-restart-r) * var(--btn-dy));
 
-  --btn-undo-c: calc(var(--h) * 3 + var(--v) * 5);
+  --btn-undo-c: calc(var(--h) * 3 + var(--v) * 1);
   --btn-undo-r: calc(var(--h) * 1 + var(--v) * 0);
   --btn-undo-x: calc(var(--btn-start-x) + var(--btn-undo-c) * var(--btn-dx));
   --btn-undo-y: calc(var(--btn-start-y) + var(--btn-undo-r) * var(--btn-dy));
 
-  --btn-previous-set-c: calc(var(--h) * 4 + var(--v) * 6);
+  --btn-previous-set-c: calc(var(--h) * 4 + var(--v) * 2);
   --btn-previous-set-r: calc(var(--h) * 1 + var(--v) * 0);
   --btn-previous-set-x: calc(var(--btn-start-x) + var(--btn-previous-set-c) * var(--btn-dx));
   --btn-previous-set-y: calc(var(--btn-start-y) + var(--btn-previous-set-r) * var(--btn-dy));
 
-  --btn-next-set-c: calc(var(--h) * 5 + var(--v) * 9);
+  --btn-next-set-c: calc(var(--h) * 5 + var(--v) * 3);
   --btn-next-set-r: calc(var(--h) * 1 + var(--v) * 0);
   --btn-next-set-x: calc(var(--btn-start-x) + var(--btn-next-set-c) * var(--btn-dx));
   --btn-next-set-y: calc(var(--btn-start-y) + var(--btn-next-set-r) * var(--btn-dy));
 
-  --btn-previous-level-c: calc(var(--h) * 4 + var(--v) * 7);
-  --btn-previous-level-r: calc(var(--h) * 0 + var(--v) * 0);
+  --btn-previous-level-c: calc(var(--h) * 4 + var(--v) * 2);
+  --btn-previous-level-r: calc(var(--h) * 0 + var(--v) * 1);
   --btn-previous-level-x: calc(var(--btn-start-x) + var(--btn-previous-level-c) * var(--btn-dx));
   --btn-previous-level-y: calc(var(--btn-start-y) + var(--btn-previous-level-r) * var(--btn-dy));
 
-  --btn-next-level-c: calc(var(--h) * 5 + var(--v) * 8);
-  --btn-next-level-r: calc(var(--h) * 0 + var(--v) * 0);
+  --btn-next-level-c: calc(var(--h) * 5 + var(--v) * 3);
+  --btn-next-level-r: calc(var(--h) * 0 + var(--v) * 1);
   --btn-next-level-x: calc(var(--btn-start-x) + var(--btn-next-level-c) * var(--btn-dx));
   --btn-next-level-y: calc(var(--btn-start-y) + var(--btn-next-level-r) * var(--btn-dy));
 }
